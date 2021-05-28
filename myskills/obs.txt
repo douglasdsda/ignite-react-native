@@ -1,0 +1,20 @@
+npx react-native init myskills  //npx baixa a versao mais nova
+npx react-native init myskills --version 
+
+yarn run android
+yarn run ios
+
+
+SafeAreaView // somente funciona ios no android nao tem efeito
+
+
+typescript: 
+
+yarn add -D typescript @types/jest @types/react @types/react-native @types/react-test-renderer
+
+
+
+--conectar emulador
+https://stackoverflow.com/questions/46235080/nox-emulator-with-react-native
+adb.exe connect 127.0.0.1:5555
+react-native run-android --deviceId=127.0.0.1:5555
