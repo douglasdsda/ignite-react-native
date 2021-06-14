@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import { InputForm } from "../../components/Forms/InputForm";
 import { CategorySelect } from "../CategorySelect";
 import uuid from "react-native-uuid";
- 
+
 import {
   Container,
   Form,
@@ -22,6 +22,7 @@ import {
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAuth } from "../../hooks/auth";
 
 interface FormData {
   name: string;
@@ -44,6 +45,7 @@ export function Register() {
     key: "category",
     name: "Categoria",
   });
+  const { user } = useAuth();
 
   const {
     control,
@@ -54,20 +56,17 @@ export function Register() {
     resolver: yupResolver(schema),
   });
 
-  const dataKey = "@gofinances:transactions";
-
   useEffect(() => {
     const loads = async () => {
-  
+      const dataKey = `@gofinances:transactions_user:${user.id}`;
       const data = await AsyncStorage.getItem(dataKey);
 
       if (data) {
-      
       }
     };
 
     loads();
-  }, []);
+  }, [user]);
 
   function handleSelectionType(type: "positive" | "negative") {
     setTransactionType(type);
@@ -95,6 +94,7 @@ export function Register() {
       date: new Date(),
     };
     try {
+      const dataKey = `@gofinances:transactions_user:${user.id}`;
       const data = await AsyncStorage.getItem(dataKey);
       const currentData = data ? JSON.parse(data) : [];
       const dataFormatted = [...currentData, newTransaction];

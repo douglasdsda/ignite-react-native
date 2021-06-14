@@ -21,14 +21,19 @@
 - yarn add victory-native // grafico
 - yarn add react-native-svg // grafico
 - yarn add date-fns
+- yarn add react-native-svg-transformer
+- yarn add @react-navigation/stack
 
 # Expo
 
 - expo install expo-font @expo-google-fonts/poppins
 - expo install expo-app-loading
 - expo install @react-native-async-storage/async-storage
+- expo install expo-google-app-auth
+- expo install expo-apple-authentication
 
 
 # Observações
 
 - tem que instalar no ios o pacote -> npx pod-install ios  // ou seja tem que estar mac, pacote de gesture handler
+- openssl rand -base64 32 | openssl sha1 -c // configurar google
