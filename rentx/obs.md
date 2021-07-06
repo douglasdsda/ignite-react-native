@@ -4,7 +4,9 @@
 - yarn add react-native-responsive-fontsize
 - yarn add react-native-iphone-x-helper
 - yarn add react-native-calendars
-
+- yarn add @react-navigation/native
+- yarn add @react-navigation/stack
+- yarn add axios
 
 # Dev
 - yarn add @types/styled-components-react-native -D
@@ -16,9 +18,15 @@
 
 - expo install expo-app-loading
  
+ - expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
 
 
 ---
+# Global
+
+- npm install -g json-server
+executar : json-server ./src/services/server.json --host 192.168.100.9 --port 3333 --delay 700
+--
 
 # Outros
 

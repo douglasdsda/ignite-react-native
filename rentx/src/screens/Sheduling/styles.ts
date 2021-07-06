@@ -25,7 +25,7 @@ background-color: ${({ theme }) => theme.colors.header};
 `;
 
 export const Title = styled.Text`
-   font-family: ${({ theme }) => theme.fonts.secondary_600};
+   font-family: ${({ theme }) => theme.fonts.secondary_500};
   color: ${({ theme }) => theme.colors.shape};
   font-size: ${RFValue(34)}px;
 
@@ -53,7 +53,7 @@ export const DateInfo = styled.View`
 
 export const DateTitle = styled.Text`
   color: ${({ theme }) => theme.colors.text};
-    font-family: ${({ theme }) => theme.fonts.secondary_500};
+    font-family: ${({ theme }) => theme.fonts.secondary_600};
   font-size: ${RFValue(10)}px;
 `;
 

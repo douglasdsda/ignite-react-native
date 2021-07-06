@@ -36,16 +36,21 @@ import {
   RentalPriceLabel,
   RentalPriceDetails,
   RentalPriceQuota,
-  RentalPriceTotal
+  RentalPriceTotal,
 } from "./styles";
-
- 
 
 import { Button } from "../../components/Button";
 import { RFValue } from "react-native-responsive-fontsize";
+import { useNavigation } from "@react-navigation/native";
 
 export function SchedulingDetails() {
   const theme = useTheme();
+
+  const navigation = useNavigation();
+
+  function handleConfirmRental() {
+    navigation.navigate("SchedulingComplete");
+  }
 
   return (
     <Container>
@@ -109,18 +114,17 @@ export function SchedulingDetails() {
           </DateInfo>
         </RentalPeriod>
 
-          <RentalPrice>
-            <RentalPriceLabel>TOTAL</RentalPriceLabel>
-            <RentalPriceDetails>
-              <RentalPriceQuota>R$ 580 x3 diarias</RentalPriceQuota>
-              <RentalPriceTotal>R$ 2.900</RentalPriceTotal>
-            </RentalPriceDetails>
-          </RentalPrice>
-
+        <RentalPrice>
+          <RentalPriceLabel>TOTAL</RentalPriceLabel>
+          <RentalPriceDetails>
+            <RentalPriceQuota>R$ 580 x3 diarias</RentalPriceQuota>
+            <RentalPriceTotal>R$ 2.900</RentalPriceTotal>
+          </RentalPriceDetails>
+        </RentalPrice>
       </Content>
 
       <Footer>
-        <Button title="Confirmar" />
+        <Button title="Alugar agora" onPress={handleConfirmRental}  color={theme.colors.success}/>
       </Footer>
     </Container>
   );
