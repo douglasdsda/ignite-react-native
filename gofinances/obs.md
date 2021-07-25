@@ -3,7 +3,8 @@
 - [Bibliotecas](#-bibliotecas)
 - [expo](#-expo)
 
-
+npm install -g sharp-cli
+npx expo-optimize
 
 # Bibilotecas
 

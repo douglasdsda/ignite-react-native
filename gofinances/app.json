@@ -2,14 +2,20 @@
   "name": "gofinances",
   "displayName": "gofinances",
   "expo": {
+    "icon": "./assets/icon.png",
     "name": "gofinances",
     "slug": "gofinances",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "assetBundlePatterns": [
       "**/*"
     ],
+    "ios": {
+      "bundleIdentifier": "com.douglasdsda.gofinances",
+      "buildNumber": "1.0.1"
+    },
     "android": {
-      "package": "com.douglasdsda.gofinances"
+      "package": "com.douglasdsda.gofinances",
+      "versionCode": 2
     }
   }
 }

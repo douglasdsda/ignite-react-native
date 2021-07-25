@@ -7,6 +7,7 @@
 - yarn add @react-navigation/native
 - yarn add @react-navigation/stack
 - yarn add axios
+- yarn add date-fns
 
 # Dev
 - yarn add @types/styled-components-react-native -D
@@ -26,6 +27,8 @@
 
 - npm install -g json-server
 executar : json-server ./src/services/server.json --host 192.168.100.9 --port 3333 --delay 700
+
+yarn json-server server.json --host 192.168.100.2 --port 3333 --delay 700
 --
 
 # Outros

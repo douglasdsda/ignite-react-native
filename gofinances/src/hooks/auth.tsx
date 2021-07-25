@@ -55,6 +55,7 @@ function AuthProvider({ children }: AuthProviderProps) {
         scopes: ["profile", "email"],
       });
 
+     
       if (result.type === "success") {
         const userLogged = {
           id: String(result.user.id),
