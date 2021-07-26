@@ -18,3 +18,10 @@ yarn add -D typescript @types/jest @types/react @types/react-native @types/react
 https://stackoverflow.com/questions/46235080/nox-emulator-with-react-native
 adb.exe connect 127.0.0.1:5555
 react-native run-android --deviceId=127.0.0.1:5555
+
+
+www.notion.so/Splash-Screen-no-Android-8da844d39d834f28bb578e41313ae493
+
+yarn add react-native-splash-screen
+
+npx react-native link react-native-splash-screen // fazer o link dos arquivos
