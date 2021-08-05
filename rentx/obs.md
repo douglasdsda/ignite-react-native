@@ -8,6 +8,7 @@
 - yarn add @react-navigation/stack
 - yarn add axios
 - yarn add date-fns
+- yarn add yup
 
 # Dev
 - yarn add @types/styled-components-react-native -D

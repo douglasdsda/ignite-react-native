@@ -12,7 +12,7 @@ interface Props extends TextInputProps {
   value?: string;
 }
 
-export function Input({ iconName, value,...rest }: Props) {
+export function Input({ iconName, value, ...rest }: Props) {
   const theme = useTheme();
 
   const [isFocused, setIsFocused] = useState(false);
@@ -23,13 +23,14 @@ export function Input({ iconName, value,...rest }: Props) {
   }
   function handleInputBlur() {
     setIsFocused(false);
-    setIsFilled(!!value)
+    setIsFilled(!!value);
   }
- 
 
   return (
-    <Container isFocused={isFocused}>
-      <IconContainer>
+    <Container>
+      <IconContainer
+        isFocused={isFocused}
+      >
         <Feather
           name={iconName}
           size={24}
@@ -39,6 +40,7 @@ export function Input({ iconName, value,...rest }: Props) {
         />
       </IconContainer>
       <InputText
+        isFocused={isFocused}
         onFocus={handleInputFocued}
         onBlur={handleInputBlur}
         {...rest}
