@@ -91,7 +91,11 @@ export function SchedulingDetails() {
       })
       .then((r) => {
         console.log(r);
-        navigation.navigate("SchedulingComplete");
+        navigation.navigate("Confirmation", {
+          title: 'Carro alugado!',
+           message: "Agora você só precisa ir\n até a concessionária da RNTX\n pegar o seu automóvel",
+           nextScreen: 'Home'
+        });
         setLoading(false);
       })
       .catch(() => {

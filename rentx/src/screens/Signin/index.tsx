@@ -11,11 +11,17 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 export function Signin() {
   const theme = useTheme();
+  const navigate = useNavigation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  function handleNewAccount() {
+    navigate.navigate("SignUpFirstStep")
+  }
 
   async function handleSign(){
     try {
@@ -80,7 +86,7 @@ export function Signin() {
             />
             <Button
               title="Criar conta gratuita"
-              onPress={() => {}}
+              onPress={handleNewAccount}
               enabled={true}
               loading={false}
               color={theme.colors.background_secondary}
