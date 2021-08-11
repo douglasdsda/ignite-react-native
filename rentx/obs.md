@@ -9,6 +9,7 @@
 - yarn add axios
 - yarn add date-fns
 - yarn add yup
+- yarn add @react-navigation/bottom-tabs
 
 # Dev
 - yarn add @types/styled-components-react-native -D

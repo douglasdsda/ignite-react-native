@@ -63,11 +63,11 @@ export function Home() {
     loads();
   }, []);
 
-  useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      return true
-    })
-  }, [])
+  // useEffect(() => {
+  //   BackHandler.addEventListener('hardwareBackPress', () => {
+  //     return true
+  //   })
+  // }, [])
 
   const onGestureEvent = useAnimatedGestureHandler({
     onStart(_, ctx: any){
@@ -116,7 +116,7 @@ export function Home() {
           )}
         />
       )}
-      <PanGestureHandler
+      {/* <PanGestureHandler
       onGestureEvent={onGestureEvent}
       >
         <Animated.View
@@ -136,7 +136,7 @@ export function Home() {
             <Ionicons color={theme.colors.shape} size={32} name="ios-car-sport" />
           </ButtonAnimated>
         </Animated.View>
-      </PanGestureHandler>
+      </PanGestureHandler> */}
     </Container>
   );
 }

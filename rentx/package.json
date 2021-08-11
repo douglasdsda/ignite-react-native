@@ -12,6 +12,8 @@
     "@expo-google-fonts/archivo": "^0.1.0",
     "@expo-google-fonts/inter": "^0.1.0",
     "@react-native-community/masked-view": "0.1.10",
+    "@react-navigation/bottom-tabs": "^5.11.11",
+    "react-native-tab-view": "^2.16.0",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
     "axios": "^0.21.1",

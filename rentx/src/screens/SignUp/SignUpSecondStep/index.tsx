@@ -8,8 +8,7 @@ import {
 import React, { useState } from "react";
 import { BackButton } from "../../../components/BackButton";
 import { Bullet } from "../../../components/Bullet";
- 
- 
+
 import { Button } from "../../../components/Button";
 
 import {
@@ -23,15 +22,15 @@ import {
 } from "./styles";
 import { PasswordInput } from "../../../components/PasswordInput";
 import { useTheme } from "styled-components";
+import api from "../../../services/api";
 
 interface Params {
   user: {
     name: string;
     email: string;
-    driverLicense: string; 
-  }
+    driverLicense: string;
+  };
 }
-
 
 export const SignUpSecondStep: React.FC = () => {
   const navigation = useNavigation();
@@ -40,8 +39,7 @@ export const SignUpSecondStep: React.FC = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
- 
-  const {user} = route.params as Params
+  const { user } = route.params as Params;
 
   function handleBack() {
     navigation.goBack();
@@ -49,29 +47,37 @@ export const SignUpSecondStep: React.FC = () => {
 
   async function handleRegister() {
     try {
-
-      if(!password || !setPassword){
-        return Alert.alert("Ops", "Informe a senha e a confirmação dela.")
+      if (!password || !setPassword) {
+        return Alert.alert("Ops", "Informe a senha e a confirmação dela.");
       }
 
-      if(password != confirmPassword) {
+      if (password != confirmPassword) {
         return Alert.alert("Senha é diferente de password");
       }
-     
-      navigation.navigate("Confirmation", {
-        title: "Conta Criada!",
-        message: `Agora é só fazer login\n e aproveitar`,
-        nextScreen: 'SignIn'
-      })
 
-     
+      await api
+        .post("/users", {
+          name: user.name,
+          email: user.email,
+          driver_license: user.driverLicense,
+          password,
+        })
+        .then(() => {
+          navigation.navigate("Confirmation", {
+            title: "Conta Criada!",
+            message: `Agora é só fazer login\n e aproveitar`,
+            nextScreen: "Signin",
+          });
+        })
+        .catch(() => {
+          Alert.alert("Opa", "Não foi possivel cadastrar.");
+        });
     } catch (error) {
-      if(error instanceof Error) {
-       return Alert.alert('Opa', error.message)
+      if (error instanceof Error) {
+        return Alert.alert("Opa", error.message);
       }
     }
- }
-
+  }
 
   return (
     <KeyboardAvoidingView behavior="position" enabled>
@@ -80,7 +86,7 @@ export const SignUpSecondStep: React.FC = () => {
           <Header>
             <BackButton onPress={handleBack} />
             <Steps>
-              <Bullet   />
+              <Bullet />
               <Bullet active />
             </Steps>
           </Header>
@@ -93,13 +99,26 @@ export const SignUpSecondStep: React.FC = () => {
 
           <Form>
             <FormTitle>2. Senha</FormTitle>
-            <PasswordInput value={password} onChangeText={setPassword} iconName="lock" placeholder="Senha" />
+            <PasswordInput
+              value={password}
+              onChangeText={setPassword}
+              iconName="lock"
+              placeholder="Senha"
+            />
 
-            <PasswordInput value={confirmPassword} onChangeText={setConfirmPassword}
-             iconName="lock"   placeholder="Repetir Senha" />
+            <PasswordInput
+              value={confirmPassword}
+              onChangeText={setConfirmPassword}
+              iconName="lock"
+              placeholder="Repetir Senha"
+            />
           </Form>
 
-          <Button onPress={handleRegister} color={theme.colors.success}  title="Cadastrar" />
+          <Button
+            onPress={handleRegister}
+            color={theme.colors.success}
+            title="Cadastrar"
+          />
         </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

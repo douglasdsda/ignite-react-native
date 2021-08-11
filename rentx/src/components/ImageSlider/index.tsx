@@ -12,7 +12,10 @@ import {
 } from "./styles";
 
 interface Props {
-  imagesUrl: string[];
+  imagesUrl: {
+    id: string;
+    photo: string;
+  }[]
 }
 
 interface ChangeImageProps {
@@ -32,8 +35,8 @@ export function ImageSlider({ imagesUrl }: Props) {
     <Container>
       <ImageIndexes>
         {
-          imagesUrl.map((_, index) => (
-            <Bullet key={String(index)} active={imageIndex == index ? true : false} />
+          imagesUrl.map((item, index) => (
+            <Bullet key={String(item.id)} active={imageIndex == index ? true : false} />
           ))
         }
    
@@ -41,12 +44,12 @@ export function ImageSlider({ imagesUrl }: Props) {
 
       <FlatList
         data={imagesUrl}
-        keyExtractor={(key) => key}
+        keyExtractor={(item) => item.id}
         horizontal
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
           <CarImageWrapper>
-            <CarImage source={{ uri: item }} resizeMode="contain" />
+            <CarImage source={{ uri: item.photo }} resizeMode="contain" />
           </CarImageWrapper>
         )}
         onViewableItemsChanged={indexChange.current}
