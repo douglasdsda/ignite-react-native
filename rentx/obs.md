@@ -7,9 +7,18 @@
 - yarn add @react-navigation/native
 - yarn add @react-navigation/stack
 - yarn add axios
-- yarn add date-fns
+- yarn add date-fnsd
+- 
 - yarn add yup
 - yarn add @react-navigation/bottom-tabs
+- yarn add @nozbe/watermelondb
+- yarn add react-native-fast-image
+
+Obs: quando acontece problema no link
+
+yarn react-native link react-native-fast-image
+
+yarn add --dev @babel/plugin-proposal-decorators // decorator
 
 # Dev
 - yarn add @types/styled-components-react-native -D
@@ -26,6 +35,11 @@
 - expo install react-native-reanimated
 
 -expo install lottie-react-native
+
+ -expo install expo-image-picker
+
+ -expo install @react-native-community/netinfo
+
 ---
 # Global
 

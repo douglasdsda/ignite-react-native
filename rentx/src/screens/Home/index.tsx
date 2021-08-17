@@ -1,67 +1,108 @@
 import React, { useEffect, useState } from "react";
-import { StatusBar, StyleSheet, BackHandler } from "react-native";
+import { StatusBar, StyleSheet, BackHandler, Alert } from "react-native";
 
 import { RFValue } from "react-native-responsive-fontsize";
-import { Ionicons } from "@expo/vector-icons";
+ import {useNetInfo} from '@react-native-community/netinfo'
+ import {synchronize} from '@nozbe/watermelondb/sync';
+ import {database} from '../../database';
+ import { Car as ModelCar } from '../../database/model/Car';
 import {
   Container,
   Header,
   TotalCars,
   HeaderContent,
   CartList,
- 
 } from "./styles";
-import { RectButton, PanGestureHandler } from "react-native-gesture-handler";
+// import { RectButton, PanGestureHandler } from "react-native-gesture-handler";
 
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   useAnimatedGestureHandler,
-   withSpring
+  withSpring,
 } from "react-native-reanimated";
 
-const ButtonAnimated = Animated.createAnimatedComponent(RectButton);
+// const ButtonAnimated = Animated.createAnimatedComponent(RectButton);
 
 import Logo from "../../assets/logo.svg";
 import { Car } from "../../components/Car";
 import { LoadAnimation } from "../../components/LoadAnimation";
 import { useNavigation } from "@react-navigation/native";
 import api from "../../services/api";
-import { CarDTO } from "../../dtos/CarDTO";
+// import { CarDTO } from "../../dtos/CarDTO";
 
 import { useTheme } from "styled-components";
+import { useAuth } from "../../hooks/auth";
 export function Home() {
   const navigation = useNavigation();
-  const [cars, setCars] = useState<CarDTO[]>([]);
+  const [cars, setCars] = useState<ModelCar[]>([]);
   const [loading, setLoading] = useState(true);
   const theme = useTheme();
-
+  const netInfo = useNetInfo()
   const positionY = useSharedValue(0);
   const positionX = useSharedValue(0);
+  const { user } = useAuth();
 
-  const myCarsButtonStyle = useAnimatedStyle(() => {
-    return {
-      transform: [
-        { translateX: positionX.value },
-        { translateY: positionY.value },
-      ],
-    };
-  });
+  // const myCarsButtonStyle = useAnimatedStyle(() => {
+  //   return {
+  //     transform: [
+  //       { translateX: positionX.value },
+  //       { translateY: positionY.value },
+  //     ],
+  //   };
+  // });
+
+  async function offlineSynchronize(){
+    await synchronize({
+      database,
+      pullChanges: async ({ lastPulledAt }) => {
+        const response = await api
+        .get(`cars/sync/pull?lastPulledVersion=${lastPulledAt || 0}`);
+        
+        const { changes, latestVersion } = response.data;
+        return { changes, timestamp: latestVersion }
+      },
+      pushChanges: async ({ changes }) => {
+        const user = changes.users;
+        await api.post('/users/sync', user);
+      },
+    });
+  }
+
+  
 
   useEffect(() => {
-    const loads = async () => {
+    let isMounted = true;
+    
+    async function fetchCars() {
       try {
-        const response = await api.get("cars");
-        setCars(response.data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+        const carCollection = database.get<ModelCar>('cars');
+        const cars = await carCollection.query().fetch();
+        
 
-    loads();
-  }, []);
+        if(isMounted){
+          setCars(cars);
+        }
+      } catch (error) {
+        console.log(error);        
+      }finally{
+        if(isMounted){
+          setLoading(false);
+        }
+      }
+    }
+
+    fetchCars();
+    return () => {
+      isMounted = false;
+    };
+  },[user]);
+
+  useEffect(() => {
+    if(netInfo.isConnected === true){
+      offlineSynchronize();
+    }
+  },[netInfo.isConnected])
 
   // useEffect(() => {
   //   BackHandler.addEventListener('hardwareBackPress', () => {
@@ -69,26 +110,28 @@ export function Home() {
   //   })
   // }, [])
 
+ 
+
   const onGestureEvent = useAnimatedGestureHandler({
-    onStart(_, ctx: any){
-      ctx.positionX =  positionX.value
-      ctx.positionY =  positionY.value
+    onStart(_, ctx: any) {
+      ctx.positionX = positionX.value;
+      ctx.positionY = positionY.value;
     },
-    onActive(event, ctx: any){
+    onActive(event, ctx: any) {
       positionX.value = event.translationX + event.translationX;
       positionY.value = event.translationY + event.translationY;
     },
-    onEnd(){
+    onEnd() {
       positionX.value = withSpring(0);
       positionY.value = withSpring(0);
     },
-  })
+  });
 
   function handleOpenMyCars() {
     navigation.navigate("MyCars");
   }
 
-  function handleCarDetails(car: CarDTO) {
+  function handleCarDetails(car: ModelCar) {
     navigation.navigate("CarDetails", { car });
   }
 

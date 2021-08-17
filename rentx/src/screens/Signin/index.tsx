@@ -7,6 +7,7 @@ import { useAuth } from "../../hooks/auth";
 import { PasswordInput } from "../../components/PasswordInput";
 import { Container, Header, Title, Subtitle, Form, Footer } from "./styles";
 import * as Yup from 'yup'
+ 
 import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
@@ -42,7 +43,7 @@ export function Signin() {
         email,
         password
       })
-       Alert.alert("Tudo certo")
+        
     } catch (error) {
       if(error instanceof Yup.ValidationError){
         return Alert.alert("Opa", error.message)

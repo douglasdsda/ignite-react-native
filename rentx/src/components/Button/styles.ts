@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 import { RectButton } from "react-native-gesture-handler";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -17,6 +17,7 @@ export const Container = styled(RectButton)<Props>`
   justify-content: center;
 
   background-color: ${({ color }) => color};
+
   margin-bottom: 8px;
 `;
 

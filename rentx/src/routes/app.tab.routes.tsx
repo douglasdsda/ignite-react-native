@@ -10,6 +10,7 @@ import HomeSvg from '../assets/new/home.svg'
 import CarSvg from '../assets/new/car.svg'
 import PeopleSvg from '../assets/new/people.svg'
 import { Platform } from "react-native";
+import { Profile } from "../screens/Profile";
 
 const AppTab = createBottomTabNavigator();
 
@@ -38,22 +39,22 @@ export function AppTabRoutes() {
          ))
        }}
        />
-       <AppTab.Screen name="Profile"
-        component={Home}
-        options={{
-          tabBarIcon: (({ color}) => (
-             <CarSvg width={24} height={24} fill={color} />
-          ))
-        }}
-        />
-       <AppTab.Screen name="MyCars"
-        component={MyCars} 
-        options={{
-          tabBarIcon: (({ color}) => (
-             <PeopleSvg width={24} height={24} fill={color} />
-          ))
-        }}
-        />
+         <AppTab.Screen name="MyCars"
+          component={MyCars} 
+          options={{
+            tabBarIcon: (({ color}) => (
+              <CarSvg width={24} height={24} fill={color} />
+              ))
+            }}
+          />
+        <AppTab.Screen name="Profile"
+         component={Profile}
+         options={{
+           tabBarIcon: (({ color}) => (
+              <PeopleSvg width={24} height={24} fill={color} />
+           ))
+         }}
+         />
     </AppTab.Navigator>
   );
 }
