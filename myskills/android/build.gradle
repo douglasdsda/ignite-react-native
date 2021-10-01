@@ -29,6 +29,9 @@ allprojects {
         maven {
             // Android JSC is installed from npm
             url("$rootDir/../node_modules/jsc-android/dist")
+
+            // ... Detox to by
+            url "$rootDir/../node_modules/detox/Detox-android"
         }
 
         google()

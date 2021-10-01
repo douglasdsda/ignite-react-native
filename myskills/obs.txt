@@ -25,3 +25,13 @@ www.notion.so/Splash-Screen-no-Android-8da844d39d834f28bb578e41313ae493
 yarn add react-native-splash-screen
 
 npx react-native link react-native-splash-screen // fazer o link dos arquivos
+
+
+yarn add detox -D
+
+npm install -g detox-cli
+
+yarn detox init -r jest // criar
+
+
+detox test -c android.emu.debug //iniciar

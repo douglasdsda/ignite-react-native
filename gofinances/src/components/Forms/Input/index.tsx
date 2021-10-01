@@ -3,10 +3,14 @@ import React from 'react';
 
   import { Container } from './styles';
 
-type Props = TextInputProps;
+// type Props = TextInputProps;
 
-function Input  ({ ...rest }: Props)   {
-  return (<Container {...rest }>
+interface Props extends TextInputProps {
+  active?: boolean;
+}
+
+function Input  ({ active = false,...rest }: Props)   {
+  return (<Container active={active} {...rest }>
 
   </Container >)
 }

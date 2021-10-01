@@ -38,3 +38,25 @@ npx expo-optimize
 
 - tem que instalar no ios o pacote -> npx pod-install ios  // ou seja tem que estar mac, pacote de gesture handler
 - openssl rand -base64 32 | openssl sha1 -c // configurar google
+
+
+# Teste:
+
+- yarn add --dev @testing-libray/react-native
+- yarn add @testing-libray/react-native -D
+- yarn add @testing-library/jest-native -D
+
+
+yarn add @types/jest -D
+
+=> correção -----
+- yarn add @testing-library/react-native
+- yarn add --dev jest-styled-components
+
+react-hooks-testing-library: 
+- yarn add @testing-library/react-hooks -D
+
+
+- yarn add ts-jest -D // testes 
+
+- yarn test --coverage
